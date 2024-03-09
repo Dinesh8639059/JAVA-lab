@@ -1,0 +1,58 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class SeasonalOutfitSelector {
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> createAndShowGUI());
+    }
+
+    private static void createAndShowGUI() {
+        JFrame frame = new JFrame("Seasonal Outfit Selector");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 1, 10, 10));
+
+        JLabel titleLabel = new JLabel("Seasonal Outfit Selector");
+        JComboBox<String> seasonComboBox = new JComboBox<>(new String[]{"Spring", "Summer", "Winter", "Rainy"});
+        JButton selectButton = new JButton("Select Outfit");
+        JLabel resultLabel = new JLabel();
+
+        selectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String season = (String) seasonComboBox.getSelectedItem();
+
+                switch (season.toLowerCase()) {
+                    case "spring":
+                        resultLabel.setText("Recommended Outfit: Light jacket, jeans, and sneakers.");
+                        break;
+                    case "summer":
+                        resultLabel.setText("Recommended Outfit: T-shirt, shorts, and sandals.");
+                        break;
+                    case "winter":
+                        resultLabel.setText("Recommended Outfit: Heavy coat, scarf, hat, gloves, and boots.");
+                        break;
+                    case "rainy":
+                        resultLabel.setText("Recommended Outfit: Waterproof jacket, umbrella, and rain boots.");
+                        break;
+                    default:
+                        resultLabel.setText("Please select a season.");
+                        break;
+                }
+            }
+        });
+
+        panel.add(titleLabel);
+        panel.add(seasonComboBox);
+        panel.add(selectButton);
+        panel.add(resultLabel);
+
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
